@@ -3,7 +3,8 @@ salary increase 50000 1-2017 Alice base salary
 salary increase 50000 1-2017 Bob base salary
 bills increase 1500 1-2017 Rent
 bills increase 500 1-2017 Groceries
-extra money 1000 3-2017 Alice gets a bonus
+extra income 1000 3-2017 Alice gets a bonus
+extra expense 500 4-2017 Car repair
 bills increase 300 4-2017 New car payment
 salary decrease 50000 5-2017 Bob quits to study math
 salary increase 60000 5-2018 Bob gets a new job
