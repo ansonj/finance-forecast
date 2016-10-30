@@ -21,7 +21,17 @@ end
 desc 'Run tests and rubocop (lint only)'
 task dev: [:test, :rcl]
 
-desc 'Start guard'
+desc 'Run forecast'
+task :run do
+  system 'ruby run.rb'
+end
+
+desc 'Start guard for development'
 task :g do
   system 'bundle exec guard'
+end
+
+desc 'Start guard for running'
+task :gr do
+  system 'bundle exec guard -G Guardfile-run'
 end

@@ -18,6 +18,5 @@
 clearing :on
 
 watch(/.*/) do
-  system 'rake dev'
   system 'rake run'
 end
