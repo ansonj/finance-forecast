@@ -1,0 +1,2 @@
+class InputEvent
+end
