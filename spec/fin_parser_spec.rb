@@ -21,6 +21,28 @@ describe FinParser do
   end
 
   describe 'starting_amount' do
-    it 'needs to be tested'
+    it 'reports a value' do
+      parser = FinParser.new(nil)
+      parser.input = ['start with 149']
+      parser.starting_amount.must_equal 149
+    end
+
+    it 'reports the first value' do
+      parser = FinParser.new(nil)
+      parser.input = ["start with 1\nstart with 2\n"]
+      parser.starting_amount.must_equal 1
+    end
+
+    it 'handles decimals' do
+      parser = FinParser.new(nil)
+      parser.input = ['start with 42.35']
+      parser.starting_amount.must_equal 42.35
+    end
+
+    it 'reports zero if no amount given' do
+      parser = FinParser.new(nil)
+      parser.input = []
+      parser.starting_amount.must_equal 0
+    end
   end
 end
