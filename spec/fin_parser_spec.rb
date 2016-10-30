@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Parser do
+describe FinParser do
   describe 'initialize' do
     it 'copies the file contents into @input'
   end

@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
 
-require './lib/parser.rb'
+require './lib/fin_parser.rb'
 require './lib/generator.rb'
 require './lib/reporter.rb'
 
-parser = Parser.new('input.txt')
+parser = FinParser.new('input.txt')
 events = parser.input_events
 start = parser.starting_amount
 

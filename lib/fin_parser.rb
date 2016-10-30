@@ -1,4 +1,4 @@
-class Parser
+class FinParser
   def initialize(file_name)
   end
 
