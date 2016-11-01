@@ -39,10 +39,11 @@ class ExtraEvent < InputEvent
 end
 
 class SaveSpendEvent < InputEvent
-  attr_accessor :save_start_date
+  attr_accessor :category, :save_start_date
 
-  def initialize(name, amount, date, start_date)
+  def initialize(name, category, amount, date, start_date)
     @name = name
+    @category = category
     @amount = amount
     @date = InputDate.new(date)
     @save_start_date = InputDate.new(start_date)
@@ -56,6 +57,7 @@ class SaveSpendEvent < InputEvent
 
   def ==(other)
     return false unless method(:==).super_method.call(self)
+    return false unless @category == other.category
     return false unless @save_start_date == other.save_start_date
     true
   end

@@ -14,11 +14,13 @@ describe InputEvent do
 
     it 'has a special case for SaveSpendEvent' do
       name = 'Trip to Disney World'
+      category = :travel
       amount = 4000
       date = '6-2017'
       start_date = '8-2016'
-      e = SaveSpendEvent.new(name, amount, date, start_date)
+      e = SaveSpendEvent.new(name, category, amount, date, start_date)
       e.name.must_equal name
+      e.category.must_equal category
       e.amount.must_equal amount
       e.date.must_equal InputDate.new(date)
       e.save_start_date.must_equal InputDate.new(start_date)
@@ -26,13 +28,13 @@ describe InputEvent do
 
     it 'fails if SaveSpendEvent is given equal dates' do
       date = '3-2017'
-      lambda { SaveSpendEvent.new('Name', 123, date, date) }.must_raise RuntimeError
+      lambda { SaveSpendEvent.new('Name', :test, 123, date, date) }.must_raise RuntimeError
     end
 
     it 'fails if SaveSpendEvent is given dates out of order' do
       event_date = '3-2018'
       start_date = '3-2017'
-      lambda { SaveSpendEvent.new('Name', 123, start_date, event_date) }.must_raise RuntimeError
+      lambda { SaveSpendEvent.new('Name', :test, 123, start_date, event_date) }.must_raise RuntimeError
     end
   end
 
@@ -81,12 +83,25 @@ describe InputEvent do
 
     it 'requires equal start dates for SaveSpendEvent' do
       name = 'Buy a new car'
+      category = :long_term
       amount = 35000
       date = '12-2019'
       start_date1 = '1-2019'
       start_date2 = '2-2019'
-      e1 = SaveSpendEvent.new(name, amount, date, start_date1)
-      e2 = SaveSpendEvent.new(name, amount, date, start_date2)
+      e1 = SaveSpendEvent.new(name, category, amount, date, start_date1)
+      e2 = SaveSpendEvent.new(name, category, amount, date, start_date2)
+      e1.wont_equal e2
+    end
+
+    it 'requires equal categories for SaveSpendEvent' do
+      name = 'Buy a new car'
+      c1 = :life
+      c2 = :big_purchases
+      amount = 35000
+      date = '12-2019'
+      start_date = '1-2019'
+      e1 = SaveSpendEvent.new(name, c1, amount, date, start_date)
+      e2 = SaveSpendEvent.new(name, c2, amount, date, start_date)
       e1.wont_equal e2
     end
   end
