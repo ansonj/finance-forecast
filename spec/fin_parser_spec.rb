@@ -31,6 +31,14 @@ describe FinParser do
         events.count.must_equal 1
         events.first.must_equal SalaryEvent.new('Alice base salary', 50000.0, '1-2017')
       end
+
+      it 'parses decreases correctly' do
+        parser = parser_with_input ['salary decrease 50000 5-2017 Bob quits to study math']
+        events = parser.input_events
+
+        events.count.must_equal 1
+        events.first.must_equal SalaryEvent.new('Bob quits to study math', -50000.0, '5-2017')
+      end
     end
   end
 
