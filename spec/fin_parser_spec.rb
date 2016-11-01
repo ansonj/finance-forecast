@@ -1,5 +1,11 @@
 require 'spec_helper'
 
+def parser_with_input(input)
+  parser = FinParser.new(nil)
+  parser.input = input
+  parser
+end
+
 describe FinParser do
   describe 'initialize' do
     it 'copies the file contents into @input' do
@@ -17,7 +23,15 @@ describe FinParser do
   end
 
   describe 'input_events' do
-    it 'needs to be tested'
+    describe 'SalaryEvent' do
+      it 'parses increases correctly' do
+        parser = parser_with_input ['salary increase 50000 1-2017 Alice base salary']
+        events = parser.input_events
+
+        events.count.must_equal 1
+        events.first.must_equal SalaryEvent.new('Alice base salary', 50000.0, '1-2017')
+      end
+    end
   end
 
   describe 'starting_amount' do
