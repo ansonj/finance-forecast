@@ -58,6 +58,24 @@ describe FinParser do
         events.first.must_equal BillsEvent.new('Car paid off', -300.0, '4-2020')
       end
     end
+
+    describe 'ExtraEvent' do
+      it 'parses extra income correctly' do
+        parser = parser_with_input ['extra income 1000 3-2017 Alice gets a bonus']
+        events = parser.input_events
+
+        events.count.must_equal 1
+        events.first.must_equal ExtraEvent.new('Alice gets a bonus', 1000.0, '3-2017')
+      end
+
+      it 'parses extra expense correctly' do
+        parser = parser_with_input ['extra expense 500 4-2017 Car repair']
+        events = parser.input_events
+
+        events.count.must_equal 1
+        events.first.must_equal ExtraEvent.new('Car repair', -500.0, '4-2017')
+      end
+    end
   end
 
   describe 'starting_amount' do
