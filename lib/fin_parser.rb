@@ -13,6 +13,7 @@ class FinParser
 
   private def event_for_line(line)
     return salary_event_for_line line if line.start_with? 'salary'
+    return bills_event_for_line line if line.start_with? 'bills'
     nil
   end
 
@@ -26,6 +27,18 @@ class FinParser
     date = match[5]
     name = match[6]
     SalaryEvent.new(name, amount, date)
+  end
+
+  private def bills_event_for_line(line)
+    r = /bills ((in|de)crease) (\d+(\.\d\d)?) (\d\d?-\d{4}) (.*?$)/
+    match = r.match(line)
+    return nil if match.nil?
+    direction = match[1]
+    amount = match[3].to_f
+    amount *= -1.0 if direction == 'decrease'
+    date = match[5]
+    name = match[6]
+    BillsEvent.new(name, amount, date)
   end
 
   def starting_amount

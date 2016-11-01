@@ -40,6 +40,24 @@ describe FinParser do
         events.first.must_equal SalaryEvent.new('Bob quits to study math', -50000.0, '5-2017')
       end
     end
+
+    describe 'BillsEvent' do
+      it 'parses increases correctly' do
+        parser = parser_with_input ['bills increase 300 4-2017 New car payment']
+        events = parser.input_events
+
+        events.count.must_equal 1
+        events.first.must_equal BillsEvent.new('New car payment', 300.0, '4-2017')
+      end
+
+      it 'parses decreases correctly' do
+        parser = parser_with_input ['bills decrease 300 4-2020 Car paid off']
+        events = parser.input_events
+
+        events.count.must_equal 1
+        events.first.must_equal BillsEvent.new('Car paid off', -300.0, '4-2020')
+      end
+    end
   end
 
   describe 'starting_amount' do
