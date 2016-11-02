@@ -86,6 +86,27 @@ describe FinParser do
         events.first.must_equal SaveSpendEvent.new('Trip to Jamaica', :travel, 3000.0, '12-2018', '5-2018')
       end
     end
+
+    describe 'mixed group of events' do
+      it 'works properly' do
+        parser = parser_with_input [
+          'salary increase 50000.34 1-2017 Bob base salary',
+          'spending event 6000 6-2018 Europe vacation (travel); start saving 1-2017',
+          'extra income 1000 3-2017 Alice gets a bonus',
+          'bills increase 1500 1-2017 Rent'
+        ]
+        expected = [
+          SalaryEvent.new('Bob base salary', 50000.34, '1-2017'),
+          SaveSpendEvent.new('Europe vacation', :travel, 6000.0, '6-2018', '1-2017'),
+          ExtraEvent.new('Alice gets a bonus', 1000, '3-2017'),
+          BillsEvent.new('Rent', 1500, '1-2017')
+        ]
+
+        events = parser.input_events
+
+        events.must_equal expected
+      end
+    end
   end
 
   describe 'starting_amount' do
