@@ -118,7 +118,10 @@ describe FinParser do
 
     it 'reports the first value' do
       parser = FinParser.new(nil)
-      parser.input = ["start with 1\nstart with 2\n"]
+      parser.input = [
+        'start with 1',
+        'start with 2'
+      ]
       parser.starting_amount.must_equal 1
     end
 
