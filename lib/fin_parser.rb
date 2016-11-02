@@ -15,6 +15,7 @@ class FinParser
     return salary_event_for_line line if line.start_with? 'salary'
     return bills_event_for_line line if line.start_with? 'bills'
     return extra_event_for_line line if line.start_with? 'extra'
+    return save_spend_event_for_line line if line.start_with? 'spending event'
     nil
   end
 
@@ -52,6 +53,18 @@ class FinParser
     date = match[4]
     name = match[5]
     ExtraEvent.new(name, amount, date)
+  end
+
+  private def save_spend_event_for_line(line)
+    r = /spending event (\d+(\.\d\d)?) (\d\d?-\d{4}) (.*?) \((\w+)\); start saving (\d\d?-\d{4})/
+    match = r.match(line)
+    return nil if match.nil?
+    amount = match[1].to_f
+    date = match[3]
+    name = match[4]
+    category = match[5].to_sym
+    start_date = match[6]
+    SaveSpendEvent.new(name, category, amount, date, start_date)
   end
 
   def starting_amount

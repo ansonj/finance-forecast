@@ -76,6 +76,16 @@ describe FinParser do
         events.first.must_equal ExtraEvent.new('Car repair', -500.0, '4-2017')
       end
     end
+
+    describe 'SaveSpendEvent' do
+      it 'parses correctly' do
+        parser = parser_with_input ['spending event 3000 12-2018 Trip to Jamaica (travel); start saving 5-2018']
+        events = parser.input_events
+
+        events.count.must_equal 1
+        events.first.must_equal SaveSpendEvent.new('Trip to Jamaica', :travel, 3000.0, '12-2018', '5-2018')
+      end
+    end
   end
 
   describe 'starting_amount' do
