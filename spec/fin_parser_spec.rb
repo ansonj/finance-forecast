@@ -137,4 +137,32 @@ describe FinParser do
       parser.starting_amount.must_equal 0
     end
   end
+
+  describe 'skipped_input' do
+    it 'lists all lines that were skipped' do
+      comment1 = 'this line is not valid, so it is skipped like a comment'
+      comment2 = 'here\'s another comment'
+      parser = parser_with_input [
+        comment1,
+        'extra expense 500 4-2017 Car repair',
+        comment2
+      ]
+      skipped = parser.skipped_input
+
+      skipped.must_equal [comment1, comment2]
+    end
+
+    it 'does not include starting amount lines' do
+      comment = 'some comment, great'
+      parser = parser_with_input [
+        'start with 3',
+        comment,
+        'start with 56.6',
+        'salary increase 50000 1-2017 Alice base salary'
+      ]
+      skipped = parser.skipped_input
+
+      skipped.must_equal [comment]
+    end
+  end
 end
