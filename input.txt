@@ -10,4 +10,4 @@ salary decrease 50000 5-2017 Bob quits to study math
 salary increase 60000 5-2018 Bob gets a new job
 bills decrease 300 4-2020 Car paid off
 
-spending event 3000 12-2018 Trip to Jamaica; start saving 5-2018
+spending event 3000 12-2018 Trip to Jamaica (travel); start saving 5-2018
