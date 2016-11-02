@@ -1,6 +1,6 @@
 start with 100
 salary increase 50000 1-2017 Alice base salary
-salary increase 50000 1-2017 Bob base salary
+salary increase 50000.34 1-2017 Bob base salary
 bills increase 1500 1-2017 Rent
 bills increase 500 1-2017 Groceries
 extra income 1000 3-2017 Alice gets a bonus
