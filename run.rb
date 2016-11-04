@@ -8,6 +8,12 @@ parser = FinParser.new('input.txt')
 events = parser.input_events
 start = parser.starting_amount
 
+skipped_lines = parser.skipped_input
+unless skipped_lines.count.zero?
+  puts "Skipped #{skipped_lines.count} lines of input:"
+  puts skipped_lines
+end
+
 generator = Generator.new(events, start)
 months = generator.output_months
 
