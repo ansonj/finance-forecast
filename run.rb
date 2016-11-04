@@ -6,7 +6,7 @@ require './lib/reporter.rb'
 
 parser = FinParser.new('input.txt')
 events = parser.input_events
-start = parser.starting_amount
+start_amount = parser.starting_amount
 
 skipped_lines = parser.skipped_input
 unless skipped_lines.count.zero?
@@ -14,7 +14,7 @@ unless skipped_lines.count.zero?
   puts skipped_lines
 end
 
-generator = Generator.new(events, start)
+generator = Generator.new(events, start_amount)
 months = generator.output_months
 
 reporter = Reporter.new(months)
