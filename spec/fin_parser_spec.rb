@@ -164,5 +164,17 @@ describe FinParser do
 
       skipped.must_equal [comment]
     end
+
+    it 'does not include blank lines' do
+      parser = parser_with_input [
+        'start with 3',
+        '',
+        "\n",
+        'salary increase 50000 1-2017 Alice base salary'
+      ]
+      skipped = parser.skipped_input
+
+      skipped.must_equal []
+    end
   end
 end

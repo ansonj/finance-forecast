@@ -79,5 +79,6 @@ class FinParser
   def skipped_input
     @input.select { |line| event_for_line(line).nil? }
           .reject { |l| l.start_with? 'start with' }
+          .reject { |l| l == '' || l == "\n" }
   end
 end
