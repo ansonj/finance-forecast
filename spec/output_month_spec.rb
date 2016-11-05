@@ -11,13 +11,14 @@ describe 'OutputMonth' do
         m.expenses = 3
         m.net = 4
         m.checking_after = 5
-        m.total_save = 6
+        m.move_to_savings = 6
         m.checking_final = 7
         m.saving_before = 8
-        m.saving_after = 9
-        m.salary_events = [SalaryEvent.new('Test', 10, '1-2016')]
-        m.bills_events = [BillsEvent.new('More', 20, '2-2016')]
-        m.extra_events = [ExtraEvent.new('Extry', 30, '3-2016')]
+        m.savings_net = 9
+        m.saving_after = 10
+        m.salary_events = [SalaryEvent.new('Test', 11, '1-2016')]
+        m.bills_events = [BillsEvent.new('More', 22, '2-2016')]
+        m.extra_events = [ExtraEvent.new('Extry', 33, '3-2016')]
         m.save_spend_events = [SaveSpendEvent.new('Save it', :vacation, 42, '12-2016', '1-2016')]
         m
       }
@@ -59,8 +60,8 @@ describe 'OutputMonth' do
       @test_month.wont_equal @expected
     end
 
-    it 'checks total_save' do
-      @test_month.total_save = -999
+    it 'checks move_to_savings' do
+      @test_month.move_to_savings = -999
       @test_month.wont_equal @expected
     end
 
@@ -71,6 +72,11 @@ describe 'OutputMonth' do
 
     it 'checks saving_before' do
       @test_month.saving_before = -999
+      @test_month.wont_equal @expected
+    end
+
+    it 'checks savings_net' do
+      @test_month.savings_net = -999
       @test_month.wont_equal @expected
     end
 
