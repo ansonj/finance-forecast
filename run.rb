@@ -18,5 +18,4 @@ generator = Generator.new(events, start_amount)
 months = generator.output_months
 
 reporter = Reporter.new(months)
-puts reporter.text
 reporter.write_html('output.html')
