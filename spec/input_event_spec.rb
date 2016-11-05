@@ -92,6 +92,18 @@ describe InputEvent do
     end
   end
 
+  describe 'saving_increment' do
+    it 'works in a simple case for one month' do
+      event = SaveSpendEvent.new('Test event', :testing, 100.0, '2-2017', '1-2017')
+      event.saving_increment.must_equal 100.0
+    end
+
+    it 'works for more than one month' do
+      event = SaveSpendEvent.new('Test event', :testing, 100.0, '11-2017', '1-2017')
+      event.saving_increment.must_equal 10.0
+    end
+  end
+
   describe '==' do
     it 'detects equality' do
       name = 'Starting salary'

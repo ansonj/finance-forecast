@@ -69,6 +69,17 @@ class SaveSpendEvent < InputEvent
     @save_start_date <= date && date <= @date
   end
 
+  def saving_increment
+    month_span = 0.0
+    current_date = @save_start_date
+    while current_date < @date
+      current_date = current_date.next_month
+      month_span += 1
+    end
+    return 0 if month_span.zero?
+    @amount / month_span
+  end
+
   def to_s
     "#{self.type} for #{@amount} on #{@date}: #{@name} (in #{@save_start_date}, start saving #{self.saving_increment} each month)"
   end
