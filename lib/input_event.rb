@@ -17,6 +17,10 @@ class InputEvent
     date == @date
   end
 
+  def to_s
+    "#{self.type} for #{@amount} on #{@date}: #{@name}"
+  end
+
   def ==(other)
     return false unless @name == other.name
     return false unless @amount == other.amount
@@ -63,6 +67,10 @@ class SaveSpendEvent < InputEvent
 
   def applies_to_date(date)
     @save_start_date <= date && date <= @date
+  end
+
+  def to_s
+    "#{self.type} for #{@amount} on #{@date}: #{@name} (in #{@save_start_date}, start saving #{self.saving_increment} each month)"
   end
 
   def ==(other)
