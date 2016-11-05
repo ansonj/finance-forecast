@@ -6,6 +6,16 @@ class InputDate
     @month, @year = string.split('-').map { |s| s.to_i }
   end
 
+  def next_month
+    new_month = @month + 1
+    new_year = @year
+    if new_month > 12
+      new_month = 1
+      new_year += 1
+    end
+    InputDate.new("#{new_month}-#{new_year}")
+  end
+
   def <=>(other)
     self_raw = (@year - 2000) * 12 + @month
     other_raw = (other.year - 2000) * 12 + other.month

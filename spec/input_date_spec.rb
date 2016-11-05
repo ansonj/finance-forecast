@@ -7,6 +7,18 @@ describe InputDate do
     date.year.must_equal 2016
   end
 
+  describe 'next_month' do
+    it 'works in a simple case' do
+      month = InputDate.new('4-2016')
+      month.next_month.must_equal InputDate.new('5-2016')
+    end
+
+    it 'works across a year boundary' do
+      month = InputDate.new('12-2016')
+      month.next_month.must_equal InputDate.new('1-2017')
+    end
+  end
+
   describe 'Comparable implementation' do
     it 'works with equality' do
       d1 = InputDate.new('1-2017')
