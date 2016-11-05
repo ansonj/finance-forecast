@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
-require './lib/fin_parser.rb'
-require './lib/generator.rb'
-require './lib/reporter.rb'
+Dir.glob('lib/*.rb').each do |file|
+  require "./#{file}"
+end
 
 parser = FinParser.new('input.txt')
 events = parser.input_events
