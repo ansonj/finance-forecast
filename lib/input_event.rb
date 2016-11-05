@@ -13,6 +13,10 @@ class InputEvent
     fail 'unknown InputEvent type'
   end
 
+  def applies_to_date(date)
+    date == @date
+  end
+
   def ==(other)
     return false unless @name == other.name
     return false unless @amount == other.amount
@@ -55,6 +59,10 @@ class SaveSpendEvent < InputEvent
 
   def type
     :save_spend
+  end
+
+  def applies_to_date(date)
+    @save_start_date <= date && date <= @date
   end
 
   def ==(other)

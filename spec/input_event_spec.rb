@@ -38,6 +38,60 @@ describe InputEvent do
     end
   end
 
+  describe 'applies_to_date' do
+    describe 'for InputEvent' do
+      it 'doesn\'t apply if date is too early' do
+        event = SalaryEvent.new('Test event', 123, '5-2016')
+        test_date = InputDate.new('4-2016')
+        event.applies_to_date(test_date).must_equal false
+      end
+
+      it 'applies if date is a match' do
+        event = SalaryEvent.new('Test event', 123, '5-2016')
+        test_date = InputDate.new('5-2016')
+        event.applies_to_date(test_date).must_equal true
+      end
+
+      it 'doesn\'t apply if the date is after' do
+        event = SalaryEvent.new('Test event', 123, '5-2016')
+        test_date = InputDate.new('6-2016')
+        event.applies_to_date(test_date).must_equal false
+      end
+    end
+
+    describe 'for SaveSpendEvent' do
+      it 'doesn\'t apply if the date is before the start date' do
+        event = SaveSpendEvent.new('Test event', :testing, 123.45, '10-2016', '1-2016')
+        test_date = InputDate.new('12-2015')
+        event.applies_to_date(test_date).must_equal false
+      end
+
+      it 'applies if the date is the start date' do
+        event = SaveSpendEvent.new('Test event', :testing, 123.45, '10-2016', '1-2016')
+        test_date = InputDate.new('1-2016')
+        event.applies_to_date(test_date).must_equal true
+      end
+
+      it 'applies if the date is between the start and end date' do
+        event = SaveSpendEvent.new('Test event', :testing, 123.45, '10-2016', '1-2016')
+        test_date = InputDate.new('5-2016')
+        event.applies_to_date(test_date).must_equal true
+      end
+
+      it 'applies if the date is the end date' do
+        event = SaveSpendEvent.new('Test event', :testing, 123.45, '10-2016', '1-2016')
+        test_date = InputDate.new('10-2016')
+        event.applies_to_date(test_date).must_equal true
+      end
+
+      it 'doesn\'t apply if the date is after the end date' do
+        event = SaveSpendEvent.new('Test event', :testing, 123.45, '10-2016', '1-2016')
+        test_date = InputDate.new('11-2016')
+        event.applies_to_date(test_date).must_equal false
+      end
+    end
+  end
+
   describe '==' do
     it 'detects equality' do
       name = 'Starting salary'
