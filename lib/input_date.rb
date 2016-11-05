@@ -16,6 +16,10 @@ class InputDate
     InputDate.new("#{new_month}-#{new_year}")
   end
 
+  def to_s
+    "#{@month}-#{@year}"
+  end
+
   def <=>(other)
     self_raw = (@year - 2000) * 12 + @month
     other_raw = (other.year - 2000) * 12 + other.month
