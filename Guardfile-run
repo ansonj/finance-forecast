@@ -17,6 +17,8 @@
 
 clearing :on
 
+ignore(/output.html/)
+
 watch(/.*/) do
   system 'rake run'
 end
