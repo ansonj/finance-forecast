@@ -1,5 +1,3 @@
-require './lib/input_date.rb'
-
 class InputEvent
   attr_accessor :name, :amount, :date
 

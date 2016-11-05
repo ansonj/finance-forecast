@@ -1,5 +1,3 @@
-require './lib/input_event.rb'
-
 class FinParser
   attr_accessor :input
 
